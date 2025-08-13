@@ -88,7 +88,7 @@ export default {
             };
         },
         sendMessage() {
-            this.ws.send(JSON.stringify({ type:"CHAT_MESSAGE",message: this.messageText }));
+            this.ws.send(JSON.stringify({ type:"CHAT_MESSAGE",message: this.messageText,from: "COMPANY" }));
             this.messageText = ''; // Clear the input field after sending
         }
 
