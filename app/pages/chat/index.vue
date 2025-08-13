@@ -21,7 +21,8 @@
 <script>
 import Contact from "./components/Contact.vue";
 import MessageCustom from "./components/MessageCustom.vue";
-
+import { getContactsByCompany } from "./helpers/Contact";
+import { getMessagesByContact } from "./helpers/Message";
 export default {
     components: {
         Contact,
@@ -30,9 +31,6 @@ export default {
     data() {
         return {
             contacts: [
-                { id: 1, name: 'Alice', messages: [{ id: 1, text: 'Hello!' }, { id: 2, text: 'How are you?' }, { id: 3, text: "Bien" }] },
-                { id: 2, name: 'Bob', messages: [{ id: 1, text: 'Hi!' }, { id: 2, text: 'Let\'s meet.' }] },
-                { id: 3, name: 'Charlie', messages: [{ id: 1, text: 'Good morning!' }, { id: 2, text: 'See you later.' }] }
             ],
             messages: [],
             currentContact: null,
@@ -41,26 +39,35 @@ export default {
         }
 
     },
+    mounted() {
+        this.getContactsByCompany(1); // Fetch contacts for company with ID 1 on mount
+    },
     methods: {
         // You can add methods here if needed
+        getContactsByCompany(id) {
+            getContactsByCompany(id).then(contacts => {
+                this.contacts = contacts;
+            });
+        },
         getContactMessages(contact) {
-            console.log('Selected contact ID:', contact);
-            const contactFound = this.contacts.find(c => c.id === contact.id);
-            this.messages = contactFound ? contactFound.messages : [];
-            this.connectWebSocket(contact.name);
+            getMessagesByContact(contact.id).then(messages => {
+                this.messages = messages;
+            });
+
+            this.connectWebSocket(contact.id);
 
             //return contact ? contact.messages : [];
         },
-        connectWebSocket(name) {
+        connectWebSocket(id) {
             // Close existing WebSocket connection if any
             if (this.ws && this.ws.readyState === WebSocket.OPEN) {
                 this.ws.close();
             }
 
-            this.ws = new WebSocket('ws://localhost:8080/chat/' + name);
+            this.ws = new WebSocket('ws://localhost:8080/chat/' + id);
 
             this.ws.onopen = () => {
-                console.log('WebSocket connection established for', name);
+                console.log('WebSocket connection established for', id);
             };
 
             this.ws.onmessage = (event) => {
