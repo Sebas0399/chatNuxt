@@ -19,5 +19,13 @@ export default defineNuxtConfig({
     public: {
       apiBase: 'http://localhost:8080'
     }
+  },
+  vite: {
+    server: {
+      allowedHosts: [
+        'ba5f809a9f64.ngrok-free.app' // dominio exacto que te da ngrok
+      ]
+    }
   }
+  
 })
