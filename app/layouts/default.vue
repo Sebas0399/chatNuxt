@@ -57,12 +57,12 @@ const items = ref([
     {
         label: 'Chat',
         icon: 'pi pi-palette',
-        items: [
-            {
-                label: 'Chat',
-                route: '/chat'
-            }
-        ]
+        route: '/chat'
+    },
+     {
+        label: 'Bots',
+        icon: 'pi pi-palette',
+        route: '/bots'
     },
 
 ]);
