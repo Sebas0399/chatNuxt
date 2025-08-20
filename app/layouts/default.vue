@@ -64,6 +64,11 @@ const items = ref([
         icon: 'pi pi-palette',
         route: '/bots'
     },
+    {
+        label: 'Flows',
+        icon: 'pi pi-palette',
+        route: '/flows'
+    },
 
 ]);
 const itemsMenu = ref([

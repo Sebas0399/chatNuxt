@@ -6,7 +6,7 @@
                 <Bot v-for="bot in bots" :key="bot.id" :bot="bot" @click="handleBotClick(bot)" />
             </div>
             <div class="col-span-2">
-
+                
             </div>
         </div>
     </DefaultLayout>
