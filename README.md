@@ -1,75 +1,21 @@
-# Nuxt Minimal Starter
+# chatNuxt
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Repository with the original Nuxt web app and an in-progress Flutter migration.
 
-## Setup
-
-Make sure to install dependencies:
+## Nuxt app (current)
 
 ```bash
-# npm
+cd /home/runner/work/chatNuxt/chatNuxt
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
+## Flutter migration target
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+cd /home/runner/work/chatNuxt/chatNuxt/flutter_app
+flutter pub get
+flutter run
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+See `/home/runner/work/chatNuxt/chatNuxt/flutter_app/README.md` for migration details.
