@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../config/app_config.dart';
 
@@ -8,7 +9,7 @@ class WsChatClient {
   WsChatClient(this._config);
 
   final AppConfig _config;
-  WebSocket? _socket;
+  WebSocketChannel? _socket;
   final StreamController<Map<String, dynamic>> _messagesController =
       StreamController.broadcast();
 
@@ -16,8 +17,8 @@ class WsChatClient {
 
   Future<void> connect(int contactId) async {
     await disconnect();
-    _socket = await WebSocket.connect('${_config.websocketBase}/chat/$contactId');
-    _socket!.listen(
+    _socket = WebSocketChannel.connect(Uri.parse('${_config.websocketBase}/chat/$contactId'));
+    _socket!.stream.listen(
       (dynamic data) {
         try {
           final decoded = jsonDecode(data as String);
@@ -49,11 +50,11 @@ class WsChatClient {
       'message': text,
       'from': 'COMPANY',
     };
-    _socket?.add(jsonEncode(payload));
+    _socket?.sink.add(jsonEncode(payload));
   }
 
   Future<void> disconnect() async {
-    await _socket?.close();
+    await _socket?.sink.close();
     _socket = null;
   }
 
